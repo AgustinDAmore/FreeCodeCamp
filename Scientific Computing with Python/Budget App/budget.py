@@ -64,7 +64,8 @@ class Category():
         amount = self.ledger["amount"]
         print("*"*((self.disenio//2)) + self.nameCategory + "*"*((self.disenio//2)))
         for i in range(len(description)):
-            print(description[i]+" "*((self.disenio + len(self.nameCategory))-(len(description[i]) + len(str(amount[i])) + 1)),amount[i])
+            descripcion = description[i][:23] if len(description[i])>23 else description[i]
+            print(descripcion+" "*((self.disenio + len(self.nameCategory))-(len(descripcion) + len(str(amount[i])) + 1)),amount[i])
         print(f"Total: {self.amount}")
         return ""
 
@@ -73,7 +74,7 @@ Food = Category("Food",1000)
 Clothing = Category("Clothing",1)
 
 Food.withdraw(-10.15,"groceries")
-Food.withdraw(-15.89,"restaurant and more foo")
+Food.withdraw(-15.89,"restaurant and more food")
 Food.transfer(50,Clothing)
 
 print(Food)
