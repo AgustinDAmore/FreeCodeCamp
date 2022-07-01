@@ -22,9 +22,9 @@ class Category:
     def get_balance(self):
         return self._balance
 
-    def transfer(self, amount, category_instance):
-        if self.withdraw(amount, "Transfer to {}".format(category_instance.description)):
-            category_instance.deposit(amount, "Transfer from {}".format(self.description))
+    def transfer(self, amount, category):
+        if self.withdraw(amount, "Transfer to {}".format(category.description)):
+            category.deposit(amount, "Transfer from {}".format(self.description))
             return True
         else:
             return False
