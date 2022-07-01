@@ -7,8 +7,7 @@ def graphic(categories):
                 spent += abs(item["amount"])
         listSpent.append(round(spent, 2))
 
-    total = sum(listSpent)
-    spent_percentage = list(map(lambda amount: int((((amount / total) * 10) // 1) * 10), listSpent))
+    spent_percentage = list(map(lambda amount: int((((amount / sum(listSpent)) * 10) // 1) * 10), listSpent))
 
     structure = ""
     for value in reversed(range(0, 101, 10)):
@@ -20,11 +19,10 @@ def graphic(categories):
                 structure += "   "
         structure += " \n"
 
-    footer = "    " + "-" * ((3 * len(categories)) + 1) + "\n"
+    footer = "    " + "_" * ((3 * len(categories)) + 1) + "\n"
     descriptions = list(map(lambda category: category.description, categories))
-    max_length = max(map(lambda description: len(description), descriptions))
-    descriptions = list(map(lambda description: description.ljust(max_length), descriptions))
+    descriptions = list(map(lambda description: description.ljust(max(map(lambda description: len(description), descriptions))), descriptions))
     for x in zip(*descriptions):
         footer += "    " + "".join(map(lambda s: s.center(3), x)) + " \n"
 
-    return ("Percentage spent by category\n" + structure + footer).rstrip("\n")
+    return ("Percentage spent by category\n" + structure + footer).strip("\n")
