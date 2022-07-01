@@ -1,14 +1,14 @@
 def graphic(categories):
-    spent = []
+    listSpent = []
     for category in categories:
         spent = 0
         for item in category.ledger:
             if item["amount"] < 0:
                 spent += abs(item["amount"])
-        spent.append(round(spent, 2))
+        listSpent.append(round(spent, 2))
 
-    total = round(sum(spent), 2)
-    spent_percentage = list(map(lambda amount: int((((amount / total) * 10) // 1) * 10), spent))
+    total = sum(listSpent)
+    spent_percentage = list(map(lambda amount: int((((amount / total) * 10) // 1) * 10), listSpent))
 
     structure = ""
     for value in reversed(range(0, 101, 10)):
